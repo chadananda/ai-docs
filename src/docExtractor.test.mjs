@@ -7,10 +7,10 @@ import {
 } from './docExtractor.mjs';
 
 // Test for extractDocs
-function testExtractDocs() {
+async function testExtractDocs() {
     // This test assumes you have a node_module named 'sample-library'
     // Adjust this based on your setup
-    const result = extractDocs('sample-library');
+    const result = await extractDocs('sample-library');
     console.log('extractDocs result:', result);
     assert(result, 'Expected result to be defined.');
     assert(typeof result.rawReadme === 'string', 'Expected rawReadme to be a string.');
