@@ -1,0 +1,11 @@
+{
+ "additionalLibraries": [
+   {
+     "name": "example-library",
+     "version": "^1.0.0"
+   }
+ ],
+ "ignoreVersions": {
+   "another-library": "<2.0.0"
+ }
+}

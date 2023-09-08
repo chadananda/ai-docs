@@ -1,0 +1,28 @@
+{
+  "name": "ai_docs",
+  "version": "1.0.0",
+  "description": "AI-enhanced documentation generator to keep LLMs updated with the latest library changes.",
+  "main": "src/index.mjs",
+  "type": "module",
+  "scripts": {
+    "test": "node src/docExtractor.test.mjs && node src/docGenerator.test.mjs && node src/utils.test.mjs",
+    "generate-docs": "node src/index.mjs"
+  },
+  "keywords": [
+    "documentation",
+    "ai",
+    "openai",
+    "library"
+  ],
+  "author": "Chad Jones <chadananda@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "dotenv": "^16.3.1",
+    "esprima": "^4.0.1",
+    "jsdom": "^22.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.6.4"
+  }
+}
