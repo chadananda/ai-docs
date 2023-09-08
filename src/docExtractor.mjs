@@ -45,8 +45,12 @@ function findReadme(dir) {
  */
 function getMainEntry(modulePath) {
     const packageJsonPath = path.join(modulePath, 'package.json');
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-    return path.join(modulePath, packageJson.main || 'index.js');
+    let mainEntry = 'index.js';
+    if (fs.existsSync(packageJsonPath)) {
+        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+        mainEntry = packageJson.main || mainEntry;
+    }
+    return path.join(modulePath, mainEntry);
 }
 
 /**
