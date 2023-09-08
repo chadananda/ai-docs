@@ -67,7 +67,7 @@ async function summarizeReadme(readmeContent) {
 * @param {Object} summaryData - Summarized documentation data.
 */
 function saveSummary(libraryName, summaryData) {
- const outputPath = path.join(__dirname, 'summaries', `${libraryName}.json`); // Adjust directory structure as needed
+ const outputPath = path.join(process.cwd(), 'summaries', `${libraryName}.json`); // Adjust directory structure as needed
  fs.writeFileSync(outputPath, JSON.stringify(summaryData, null, 2));
  console.log(`Saved summary for ${libraryName} to ${outputPath}`);
 }
@@ -79,7 +79,7 @@ function saveSummary(libraryName, summaryData) {
 * @param {Object} indexData - Detailed documentation data.
 */
 function saveIndex(libraryName, indexData) {
- const outputPath = path.join(__dirname, 'indexes', `${libraryName}.json`); // Adjust directory structure as needed
+ const outputPath = path.join(process.cwd(), 'indexes', `${libraryName}.json`); // Adjust directory structure as needed
  fs.writeFileSync(outputPath, JSON.stringify(indexData, null, 2));
  console.log(`Saved index for ${libraryName} to ${outputPath}`);
 }
