@@ -16,27 +16,61 @@
 import fs from 'fs';
 import path from 'path';
 import esprima from 'esprima';
-import { summarizeReadme } from './utils.mjs';  // Using your utility function for summarizing the README
+import { summarizeReadme } from './utils.mjs';
 
 /**
  * Detects the presence of a README file in a given directory.
+ *
+ * @param {string} dir - Directory to search for a README.
+ * @returns {string|null} - Path to the README file or null if not found.
  */
 function findReadme(dir) {
-    // ... (Your existing logic)
+    const readmeFiles = ['README.md', 'readme.md', 'Readme.md'];
+
+    for (const file of readmeFiles) {
+        const fullPath = path.join(dir, file);
+        if (fs.existsSync(fullPath)) {
+            return fullPath;
+        }
+    }
+
+    return null;
 }
 
 /**
  * Gets the main entry file of a module from its package.json.
+ *
+ * @param {string} modulePath - Path to the npm module.
+ * @returns {string} - Path to the main entry file of the module.
  */
 function getMainEntry(modulePath) {
-    // ... (Your existing logic)
+    const packageJsonPath = path.join(modulePath, 'package.json');
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+    return path.join(modulePath, packageJson.main || 'index.js');
 }
 
 /**
  * Parses a JavaScript file and extracts function details.
+ *
+ * @param {string} filePath - Path to the JavaScript file.
+ * @returns {Array} - List of functions extracted from the file.
  */
 function extractFunctions(filePath) {
-    // ... (Your existing logic)
+    const code = fs.readFileSync(filePath, 'utf-8');
+    const parsedCode = esprima.parseModule(code, { comment: true });
+    const functions = [];
+
+    for (const node of parsedCode.body) {
+        if (node.type === 'FunctionDeclaration') {
+            functions.push({
+                name: node.id.name,
+                params: node.params.map(param => param.name),
+                // You can add more details if needed
+            });
+        }
+    }
+
+    return functions;
 }
 
 /**
@@ -46,11 +80,12 @@ function extractFunctions(filePath) {
  * @returns {Object} - Extracted documentation data.
  */
 function extractModuleDocumentation(moduleName) {
-    let result = {};  // Initialize result as an empty object
-
-    // ... (Your existing logic)
-
-    return result;  // Return result
+    const docs = extractDocs(moduleName);
+    const functionDetails = extractFunctions(docs.rawCode);
+    return {
+        readme: docs.rawReadme,
+        functions: functionDetails
+    };
 }
 
 /**
