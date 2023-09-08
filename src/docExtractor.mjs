@@ -60,17 +60,19 @@ function getMainEntry(modulePath) {
  * @returns {Array} - List of functions extracted from the file.
  */
 function extractFunctions(filePath) {
-    const code = fs.readFileSync(filePath, 'utf-8');
-    const parsedCode = esprima.parseModule(code, { comment: true });
-    const functions = [];
+    let functions = [];
+    if (fs.existsSync(filePath)) {
+        const code = fs.readFileSync(filePath, 'utf-8');
+        const parsedCode = esprima.parseModule(code, { comment: true });
 
-    for (const node of parsedCode.body) {
-        if (node.type === 'FunctionDeclaration') {
-            functions.push({
-                name: node.id.name,
-                params: node.params.map(param => param.name),
-                // You can add more details if needed
-            });
+        for (const node of parsedCode.body) {
+            if (node.type === 'FunctionDeclaration') {
+                functions.push({
+                    name: node.id.name,
+                    params: node.params.map(param => param.name),
+                    // You can add more details if needed
+                });
+            }
         }
     }
 
