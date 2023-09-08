@@ -10,7 +10,6 @@ import {
 function testExtractDocs() {
     // This test assumes you have a node_module named 'sample-library'
     // Adjust this based on your setup
-function testExtractDocs() {
     const result = extractDocs('sample-library');
     console.log('extractDocs result:', result);
     assert(result, 'Expected result to be defined.');
