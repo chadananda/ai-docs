@@ -10,8 +10,9 @@ import {
 function testExtractDocs() {
     // This test assumes you have a node_module named 'sample-library'
     // Adjust this based on your setup
+function testExtractDocs() {
     const result = extractDocs('sample-library');
-
+    console.log('extractDocs result:', result);
     assert(result, 'Expected result to be defined.');
     assert(typeof result.rawReadme === 'string', 'Expected rawReadme to be a string.');
     assert(typeof result.rawCode === 'string', 'Expected rawCode to be a string.');
