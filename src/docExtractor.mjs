@@ -46,7 +46,11 @@ function extractFunctions(filePath) {
  * @returns {Object} - Extracted documentation data.
  */
 function extractModuleDocumentation(moduleName) {
+    let result = {};  // Initialize result as an empty object
+
     // ... (Your existing logic)
+
+    return result;  // Return result
 }
 
 /**
