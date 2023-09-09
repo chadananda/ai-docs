@@ -4,6 +4,7 @@ import assert from 'assert';
 import {
     generateDocumentationFiles
 } from './docGenerator.mjs';
+import { ensureDirectoryExistence } from './utils.mjs';
 
 // Sample data for testing
 const mockLibraryData = {
@@ -34,6 +35,9 @@ function testGenerateDocumentationFiles() {
         throw error;
     }
 }
+
+// Ensure summaries directory exists
+ensureDirectoryExistence(path.join(process.cwd(), 'summaries'));
 
 // Run tests
 testGenerateDocumentationFiles();

@@ -17,6 +17,12 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
+function ensureDirectoryExistence(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+}
+
 dotenv.config();
 
 const GPT_4_ENDPOINT = 'https://api.openai.com/v1/engines/text-davinci-004/completions';  // This can be updated based on GPT-4 engine changes
